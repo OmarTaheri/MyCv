@@ -21,3 +21,9 @@
   border: 5px solid var(--main-color);
   transition: width 0.3s ease, height 0.3s ease, top 0.13s ease, left 0.13s ease;
 }
+@media screen and (max-width: 849px) {
+  .cursor,
+  .cursorOutline {
+    display: none;
+  }
+}

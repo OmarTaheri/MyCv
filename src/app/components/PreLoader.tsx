@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import style from "./preloader.module.css";
-
+import { useEffect } from "react";
 export default function PreLoader() {
   const [hide, setHide] = useState(false);
 

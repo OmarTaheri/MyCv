@@ -9,12 +9,11 @@
   scroll-behavior: smooth;
   cursor: none;
 }
-html {
-  overflow-x: hidden;
-}
+
 body {
   width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body::before {
