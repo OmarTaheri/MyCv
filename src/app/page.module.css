@@ -41,9 +41,9 @@
   margin: 15px;
   margin-left: 400px;
   width: calc(100% - 400px);
-  height: calc(100vh - 70px);
-  z-index: -2;
+  z-index: -1;
 }
+
 .experiences h2 {
   font-size: 5rem;
   margin-top: -26px;
@@ -121,9 +121,61 @@
   fill: var(--secondary-color);
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1580px) {
   .experiences h2 {
     font-size: 10rem;
     margin-top: -54px;
+  }
+}
+
+@media screen and (min-width: 1150px) and (max-width: 1580px) {
+  .experiences h2 {
+    font-size: 6rem;
+    margin-top: -30px;
+  }
+}
+@media screen and (min-width: 850px) and (max-width: 1050px) {
+  .experiences h2 {
+    font-size: 3rem;
+    margin-top: -15px;
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 849px) {
+  .avatar,
+  .avatar img {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .container {
+    display: block;
+  }
+  .broad {
+    position: relative;
+    width: calc(100vw - 90px);
+    height: auto;
+    padding: 15px;
+    z-index: -10;
+  }
+  .experiences {
+    position: relative;
+    margin: 15px;
+    width: calc(100vw - 70px);
+  }
+  .qrcode {
+    display: none;
+  }
+  .experiences h2 {
+    font-size: 4em;
+    margin-top: -15px;
+  }
+  .skills {
+    margin-top: 20px;
+  }
+  .experiences h3 {
+    font-size: 4em;
+    margin-top: -15px;
   }
 }
