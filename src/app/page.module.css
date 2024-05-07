@@ -40,6 +40,9 @@
 .experiences {
   margin: 15px;
   margin-left: 400px;
+  width: calc(100% - 400px);
+  height: calc(100vh - 70px);
+  z-index: -2;
 }
 .experiences h2 {
   font-size: 5rem;
@@ -76,6 +79,10 @@
   color: white;
   font-weight: 700;
   padding: 0.2rem 0.4rem;
+  transition: background-color 0.3s ease;
+}
+.skills span:hover {
+  background-color: var(--secondary-color);
 }
 .skills div {
   display: flex;
@@ -103,7 +110,20 @@
   height: 20px;
 }
 
-.contactInfo a {
+.contactInfo * {
   color: #000;
   text-decoration: none;
+  transition: color 0.3s ease; /* Add this line */
+}
+.contactInfo *:hover,
+.contactInfo *:hover img {
+  color: var(--secondary-color);
+  fill: var(--secondary-color);
+}
+
+@media screen and (min-width: 1440px) {
+  .experiences h2 {
+    font-size: 10rem;
+    margin-top: -54px;
+  }
 }

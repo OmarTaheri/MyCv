@@ -1,21 +1,17 @@
 "use client";
 import useMousePosition from "../utils/useMousePosition";
 import style from "./cursor.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 export default function Page() {
   const { x, y } = useMousePosition();
+
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorOutlineRef = useRef<HTMLDivElement>(null);
+  console.log(x, y);
   useEffect(() => {
-    if (cursorRef.current) {
-      cursorRef.current.style.left = `${x}px`;
-      cursorRef.current.style.top = `${y}px`;
-    }
-  }, [x, y]);
-  useEffect(() => {
-    if (cursorOutlineRef.current) {
-      cursorOutlineRef.current.style.left = `${x}px`;
-      cursorOutlineRef.current.style.top = `${y}px`;
+    if (cursorRef.current && cursorOutlineRef.current) {
+      cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      cursorOutlineRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     }
   }, [x, y]);
 

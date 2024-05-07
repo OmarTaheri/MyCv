@@ -1,5 +1,6 @@
 :root {
   --main-color: #416aff;
+  --secondary-color: #6586ff;
 }
 * {
   margin: 0;
@@ -15,7 +16,7 @@ body {
 
 body::before {
   content: "";
-  z-index: 0;
+  z-index: -1;
   position: fixed;
   top: 0px;
   left: 0px;

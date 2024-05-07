@@ -1,21 +1,23 @@
 .cursor {
   position: absolute;
-  z-index: 999999;
+  z-index: 10; /* Lower z-index */
   left: 0;
-  top: 0;
+  top: -10;
   width: 10px;
   height: 10px;
-  background-color: var(--main-color);
-  transform: translate(-50%, -50%);
   pointer-events: none;
+  background-color: var(--main-color);
   transition: width 0.3s ease, height 0.3s ease, top 0.1s ease, left 0.1s ease;
 }
 .cursorOutline {
   position: absolute;
-  z-index: 999999;
+  z-index: 999999; /* Haigher z-index */
   width: 40px;
   height: 40px;
+  top: 20px;
+  left: -15px;
+  pointer-events: none;
+
   border: 5px solid var(--main-color);
-  transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.3s ease, top 0.13s ease, left 0.13s ease;
 }
