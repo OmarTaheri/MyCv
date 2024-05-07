@@ -11,7 +11,7 @@
 .experience span:hover {
   background-color: var(--secondary-color);
 }
-.experience .experience h3 {
+.experience h3 {
   font-size: 2rem;
   font-weight: 500;
   display: inline;
