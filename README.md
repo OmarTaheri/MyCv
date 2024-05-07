@@ -18,7 +18,7 @@ This is a simple web application created with Next.js 14.2 that allows you to cr
 
 - **Front-end:** Next.js 14.2, HTML, CSS
 - **Back-end (Future Plan):** Node.js, Express.js 🚀
-- **Database (Future Plan):** MongoDB 💾
+- **Database (Future Plan):** MongoDB or SQL (I steel didnt decide) 💾
 
 ## Getting Started 🚀
 

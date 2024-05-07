@@ -36,6 +36,7 @@
   font-size: 1.6rem;
   margin-top: -14px;
 }
+/* experiences part */
 .experiences {
   margin: 15px;
   margin-left: 400px;
@@ -44,27 +45,7 @@
   font-size: 5rem;
   margin-top: -26px;
 }
-
-.experience span {
-  background-color: var(--main-color);
-  color: white;
-  padding: 0.3rem 0.6rem;
-  margin: 10px;
-  position: relative;
-  bottom: 3px;
-}
-
-.experience h3 {
-  font-size: 2rem;
-  font-weight: 500;
-  display: inline;
-}
-@media screen and (min-width: 1440px) {
-  .experiences h2 {
-    font-size: 10rem;
-    margin-top: -50px;
-  }
-}
+/* End of experiences part */
 
 .qrcode div {
   background-color: var(--main-color);
@@ -73,11 +54,7 @@
   align-items: center;
   padding: 10px;
 }
-.qrcode div p {
-  font-size: 3rem;
-  font-weight: 700;
-  color: white;
-}
+
 .qrcode div img {
   border-radius: 10px;
   border: 5px solid white;
@@ -85,6 +62,7 @@
 
 .qrcode {
   margin-top: auto;
+  width: 140px;
 }
 .qrcode h2,
 .skills h2 {

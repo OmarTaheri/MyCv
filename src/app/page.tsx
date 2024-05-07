@@ -2,10 +2,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Cursor from "./components/Cursor";
+import Experience from "./components/Experience";
+import { experiences, skills } from "./data/data";
+import PreLoader from "./components/PreLoader";
 export default function Home() {
   return (
     <>
       <Cursor />
+      <PreLoader />
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.broad}>
@@ -47,199 +51,28 @@ export default function Home() {
             <div className={styles.skills}>
               <h2>Skills</h2>
               <div>
-                <span>Next.js</span>
-                <span>nodeJS</span>
-                <span>Javascript</span>
-                <span>HTML</span>
-                <span>lunix</span>
-                <span>lunix</span>
-                <span>lunix</span>
+                {skills.map((skill, index) => (
+                  <span key={index}>{skill}</span>
+                ))}
               </div>
             </div>
             <div className={styles.qrcode}>
               <h2>QR code</h2>
               <div>
                 <Image src="/qr.png" alt="QR code" width={120} height={120} />
-                <p>Scan me</p>
               </div>
             </div>
           </div>
           <div className={styles.experiences}>
             <h2>Experiences.</h2>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a I
-                  worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a I
-                  worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a I
-                  worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. mobile
-                  application using React Native.
-                </p>
-              </div>
-            </div>
-            <div className={styles.experience}>
-              <div>
-                <div className={styles.title}>
-                  <h3>Taking my first Programming course</h3>
-                  <span>AUG 5, 2015</span>
-                </div>
-                <p>
-                  I worked as a software developer intern at X. I developed a
-                  mobile application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native. I worked as
-                  a software developer intern at X. I developed a mobile
-                  application using React Native. I worked as a software
-                  developer intern at X. I developed a mobile application using
-                  React Native. I worked as a software developer intern at X. I
-                  developed a mobile application using React Native.
-                </p>
-              </div>
-            </div>
+            {experiences.map((experience) => (
+              <Experience
+                key={experience.id}
+                title={experience.title}
+                date={experience.startDate}
+                description={experience.description}
+              />
+            ))}
           </div>
         </div>
       </main>
