@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import style from "./preloader.module.css";
-import { useEffect } from "react";
 export default function PreLoader() {
   const [hide, setHide] = useState(false);
+  const [isPreloading, setIsPreloading] = useState(true);
 
+  useEffect(() => {
+    if (isPreloading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isPreloading]);
   const text = [
     "< ",
     " ",
@@ -61,7 +68,11 @@ export default function PreLoader() {
     "e",
     "💖",
   ];
-
+  useEffect(() => {
+    if (hide) {
+      setIsPreloading(false);
+    }
+  }, [hide]);
   if (hide) {
     return null;
   }
@@ -106,7 +117,7 @@ export default function PreLoader() {
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
         style={{ zIndex: 998 }}
-        transition={{ duration: 2, delay: 11, ease: "circInOut" }}
+        transition={{ duration: 1, delay: 11, ease: "circInOut" }}
         onAnimationComplete={() => setHide(true)}
       >
         <div className={style.preloadertext}>
