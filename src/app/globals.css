@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
+body::after {
   content: "";
   z-index: 0;
   position: fixed;
@@ -27,7 +27,7 @@ body::before {
   border: 35px solid var(--main-color);
 }
 @media screen and (max-width: 849px) {
-  body::before {
+  body::after {
     bottom: 0px;
     border: 20px solid var(--main-color);
   }

@@ -154,22 +154,22 @@
   }
   .broad {
     position: relative;
-    width: calc(100vw - 90px);
+    width: calc(100vw - 50px);
     height: auto;
-    padding: 5px;
+    margin: auto;
     z-index: -10;
   }
   .experiences {
     position: relative;
     margin: 5px;
-    width: calc(100vw - 90px);
+    width: calc(100vw - 20px);
   }
   .qrcode {
     display: none;
   }
   .experiences h2 {
-    font-size: 3em;
-    margin-top: -15px;
+    font-size: 2em;
+    margin-top: 0;
   }
   .skills {
     margin-top: 20px;
@@ -177,5 +177,8 @@
   .experiences h3 {
     font-size: 4em;
     margin-top: -15px;
+  }
+  .main {
+    margin: 20px;
   }
 }
