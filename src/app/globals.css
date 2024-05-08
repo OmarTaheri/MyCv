@@ -26,3 +26,9 @@ body::before {
   bottom: 0px;
   border: 35px solid var(--main-color);
 }
+@media screen and (max-width: 849px) {
+  body::before {
+    bottom: 0px;
+    border: 20px solid var(--main-color);
+  }
+}
