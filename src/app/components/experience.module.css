@@ -16,6 +16,9 @@
   font-weight: 500;
   display: inline;
 }
+.experience {
+  margin-bottom: 1rem;
+}
 @media screen and (max-width: 849px) {
   .experience span {
     padding: 0.2rem 0.4rem;
