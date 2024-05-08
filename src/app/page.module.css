@@ -18,6 +18,7 @@
 .avatar {
   width: 100%;
   height: 200px;
+  overflow: hidden;
 }
 
 .avatar img {
@@ -25,6 +26,10 @@
   height: 200px;
   object-fit: cover;
   object-position: 10% 50%;
+  transition: transform 0.3s ease-in-out;
+}
+.avatar img:hover {
+  transform: scale(1.1);
 }
 .avatarTitle > h1 {
   font-weight: 700;
@@ -185,6 +190,9 @@
   }
   .avatarTitle h1 {
     font-size: 2.3rem;
+    margin: 5px 0;
+  }
+  .avatarTitle h2 {
     margin: 5px 0;
   }
 }
