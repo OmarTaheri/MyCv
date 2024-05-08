@@ -13,6 +13,7 @@
   height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
+  z-index: 999999;
 }
 .avatar {
   width: 100%;
