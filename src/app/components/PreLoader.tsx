@@ -1,133 +1,86 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import style from "./preloader.module.css";
-export default function PreLoader() {
-  const [hide, setHide] = useState(false);
-  const [isPreloading, setIsPreloading] = useState(true);
+
+interface TextAnimationProps {
+  text: string;
+  delay: number;
+  zIndex: number;
+}
+
+const TextAnimation: React.FC<TextAnimationProps> = ({
+  text,
+  delay,
+  zIndex,
+}) => {
+  return (
+    <motion.div
+      id={style.preloader}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      style={{ zIndex }}
+      transition={{ duration: 1, delay: delay + text.length * 0.1 }}
+    >
+      <div className={style.preloadertext}>
+        {text.split("").map((char, index) => (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: delay + index * 0.1 }}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+const PreLoader: React.FC = () => {
+  const [isPreloading, setIsPreloading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (isPreloading) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = isPreloading ? "hidden" : "auto";
+    return () => {
       document.body.style.overflow = "auto";
-    }
+    };
   }, [isPreloading]);
-  const text = [
-    "< ",
-    " ",
-    "H",
-    "e",
-    "l",
-    "l",
-    "o",
-    " ",
-    "E",
-    "v",
-    "e",
-    "r",
-    "y",
-    "o",
-    "n",
-    "e",
-    "👋",
-    ">",
+
+  const handleAnimationComplete = useCallback((): void => {
+    setIsPreloading(false);
+  }, []);
+
+  const texts: string[] = [
+    "< Hello Everyone\u{1F44B}>",
+    "I am Omar\u{1F60E}. And...",
+    "Enjoy My Page\u{1F496}",
   ];
-  const text2 = [
-    "I",
-    " ",
-    "a",
-    "m",
-    " ",
-    "O",
-    "m",
-    "a",
-    "r",
-    "😎",
-    ".",
-    " ",
-    "A",
-    "n",
-    "d",
-    ".",
-    ".",
-    ".",
-  ];
-  const text3 = [
-    "E",
-    "n",
-    "j",
-    "o",
-    "y",
-    " ",
-    "M",
-    "y",
-    " ",
-    "P",
-    "a",
-    "g",
-    "e",
-    "💖",
-  ];
-  useEffect(() => {
-    if (hide) {
-      setIsPreloading(false);
-    }
-  }, [hide]);
-  if (hide) {
-    return null;
-  }
+
+  if (!isPreloading) return null;
 
   return (
-    <>
-      <motion.div
-        id={style.preloader}
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        style={{ zIndex: 1000 }}
-        transition={{ duration: 1, delay: 3 }}
-      >
-        <div className={style.preloadertext}>
-          {text.map((char, index) => (
-            <span key={index} style={{ animationDelay: `${index * 0.1}s` }}>
-              {char}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-      <motion.div
-        id={style.preloader}
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        style={{ zIndex: 999 }}
-        transition={{ duration: 1, delay: 7, ease: "circInOut" }}
-      >
-        <div className={style.preloadertext}>
-          {text2.map((char, index) => (
-            <span
-              key={index}
-              style={{ animationDelay: `${index * 0.1 + 4.5}s` }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-      </motion.div>
+    <AnimatePresence>
+      {texts.map((text, index) => (
+        <TextAnimation
+          key={index}
+          text={text}
+          delay={index * 4}
+          zIndex={1000 - index}
+        />
+      ))}
       <motion.div
         id={style.preloader}
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
-        style={{ zIndex: 998 }}
-        transition={{ duration: 1, delay: 11, ease: "circInOut" }}
-        onAnimationComplete={() => setHide(true)}
-      >
-        <div className={style.preloadertext}>
-          {text3.map((char, index) => (
-            <span key={index} style={{ animationDelay: `${index * 0.1 + 8}s` }}>
-              {char}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-    </>
+        exit={{ x: "-100%" }}
+        style={{ zIndex: 997 }}
+        transition={{ duration: 1, delay: texts.length * 4, ease: "circInOut" }}
+        onAnimationComplete={handleAnimationComplete}
+      />
+    </AnimatePresence>
   );
-}
+};
+
+export default PreLoader;
