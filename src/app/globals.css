@@ -25,6 +25,7 @@ body::after {
   right: 0px;
   bottom: 0px;
   border: 35px solid var(--main-color);
+  pointer-events: none;
 }
 @media screen and (max-width: 849px) {
   body::after {
