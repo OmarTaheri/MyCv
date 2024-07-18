@@ -1,24 +1,52 @@
 "use client";
-import useMousePosition from "../utils/useMousePosition";
-import style from "./cursor.module.css";
-import { useEffect, useRef } from "react";
-export default function Page() {
-  const { x, y } = useMousePosition();
 
+import { useState, useEffect, useRef, useCallback } from "react";
+import styles from "./cursor.module.css";
+
+const CustomCursor = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorOutlineRef = useRef<HTMLDivElement>(null);
-  console.log(x, y);
+
+  const updateCursorPosition = useCallback(
+    (clientX: number, clientY: number) => {
+      const x = clientX;
+      const y = clientY;
+      setPosition({ x, y });
+    },
+    []
+  );
+
   useEffect(() => {
-    if (cursorRef.current && cursorOutlineRef.current) {
-      cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      cursorOutlineRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    }
-  }, [x, y]);
+    const handleMouseMove = (e: MouseEvent) => {
+      updateCursorPosition(e.clientX, e.clientY);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [updateCursorPosition]);
+
+  useEffect(() => {
+    const updateCursorStyle = () => {
+      if (cursorRef.current && cursorOutlineRef.current) {
+        const transform = `translate(${position.x}px, ${position.y}px)`;
+        cursorRef.current.style.transform = transform;
+        cursorOutlineRef.current.style.transform = transform;
+      }
+    };
+
+    updateCursorStyle();
+  }, [position]);
 
   return (
-    <div>
-      <div ref={cursorOutlineRef} className={style.cursorOutline} />
-      <div ref={cursorRef} className={style.cursor} />
-    </div>
+    <>
+      <div ref={cursorOutlineRef} className={styles.cursorOutline} />
+      <div ref={cursorRef} className={styles.cursor} />
+    </>
   );
-}
+};
+
+export default CustomCursor;
