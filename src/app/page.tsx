@@ -5,11 +5,14 @@ import Cursor from "./components/Cursor";
 import Experience from "./components/Experience";
 import { experiences, skills } from "./data/data";
 import PreLoader from "./components/PreLoader";
+import { useState } from "react";
 export default function Home() {
+  const [isPreloading, setIsPreloading] = useState(true);
+
   return (
     <>
-      <Cursor />
-      <PreLoader />
+      <Cursor isPreloading={isPreloading} />
+      {isPreloading && <PreLoader setIsPreloading={setIsPreloading} />}
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.broad}>

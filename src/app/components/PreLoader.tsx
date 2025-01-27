@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import style from "./preloader.module.css";
 
 interface TextAnimationProps {
   text: string;
   delay: number;
   zIndex: number;
+}
+
+interface PreLoaderProps {
+  setIsPreloading: (value: boolean) => void;
 }
 
 const TextAnimation: React.FC<TextAnimationProps> = ({
@@ -38,47 +42,90 @@ const TextAnimation: React.FC<TextAnimationProps> = ({
     </motion.div>
   );
 };
-const PreLoader: React.FC = () => {
-  const [isPreloading, setIsPreloading] = useState<boolean>(true);
+
+const PreLoader: React.FC<PreLoaderProps> = ({ setIsPreloading }) => {
+  const [initialDelayComplete, setInitialDelayComplete] = useState(false);
+  const [localLoading, setLocalLoading] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    document.body.style.overflow = isPreloading ? "hidden" : "auto";
+    if (prefersReducedMotion) {
+      setIsPreloading(false);
+      setLocalLoading(false);
+    }
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isPreloading]);
+  }, [prefersReducedMotion, setIsPreloading]);
 
-  const handleAnimationComplete = useCallback((): void => {
-    setIsPreloading(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialDelayComplete(true);
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
-  const texts: string[] = [
-    "< Hello Everyone\u{1F44B}>",
-    "I am Omar\u{1F60E}. And...",
-    "Enjoy My Page\u{1F496}",
-  ];
+  const handleAnimationComplete = useCallback((): void => {
+    setLocalLoading(false);
+    setIsPreloading(false);
+  }, [setIsPreloading]);
 
-  if (!isPreloading) return null;
+  const handleSkip = useCallback((): void => {
+    setLocalLoading(false);
+    setIsPreloading(false);
+  }, [setIsPreloading]);
+
+  const texts: string[] = [
+    "< Hi, I'm Omar Taheri />",
+    "< Computer Science Student />",
+    "< I hope you will love my page />",
+  ];
 
   return (
     <AnimatePresence>
-      {texts.map((text, index) => (
-        <TextAnimation
-          key={index}
-          text={text}
-          delay={index * 4}
-          zIndex={1000 - index}
-        />
-      ))}
-      <motion.div
-        id={style.preloader}
-        initial={{ x: 0 }}
-        animate={{ x: "-100%" }}
-        exit={{ x: "-100%" }}
-        style={{ zIndex: 997 }}
-        transition={{ duration: 1, delay: texts.length * 4, ease: "circInOut" }}
-        onAnimationComplete={handleAnimationComplete}
-      />
+      {localLoading && (
+        <>
+          {initialDelayComplete && (
+            <>
+              {texts.map((text, index) => (
+                <TextAnimation
+                  key={index}
+                  text={text}
+                  delay={index * 4}
+                  zIndex={1000 - index}
+                />
+              ))}
+              
+              <motion.button
+                aria-label="Skip Preloader"
+                className={style.skipButton}
+                onClick={handleSkip}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                Skip
+              </motion.button>
+            </>
+          )}
+
+          <motion.div
+            id={style.preloader}
+            initial={{ x: 0 }}
+            animate={{ x: "-100%" }}
+            exit={{ x: "-100%" }}
+            style={{ zIndex: 997 }}
+            transition={{
+              duration: 1,
+              delay: texts.length * 4,
+              ease: "circInOut",
+            }}
+            onAnimationComplete={handleAnimationComplete}
+          />
+        </>
+      )}
     </AnimatePresence>
   );
 };
